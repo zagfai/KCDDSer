@@ -56,8 +56,7 @@ class sign():
 # end sign()  
         
 class signAll():
-    def POST( self ):
-        # connect db
+    def GET( self ):
         conn = MySQLdb.connect(host=sae.const.MYSQL_HOST, port=int(sae.const.MYSQL_PORT),\
                                 user=sae.const.MYSQL_USER, passwd=sae.const.MYSQL_PASS, \
                                 db=sae.const.MYSQL_DB,     charset="utf8")
@@ -76,10 +75,6 @@ class signAll():
             print acount
             result.append( Signer( str(acount[0]), str(acount[1]) ).sign() )
             yield result[-1]['user'] + result[-1]['status'].encode('utf-8') + '\n'
-# end POST()
-    def GET( self ):
-        web.header("CONTENT-TYPE","text/html")
-        return ''.join( open('tmpl.html').readlines() )
 
 urls = (
     '/sign/(.+)/(.+)/(.+)/', 'sign',
