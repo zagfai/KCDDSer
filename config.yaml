@@ -1,0 +1,12 @@
+---
+name: kssign
+version: 1
+
+libraries:
+- name: webpy
+  version: "0.36"
+
+cron:
+- description: sign_all_users
+  url: /signall
+  schedule: 0 6 * * *

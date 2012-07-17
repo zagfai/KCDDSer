@@ -1,0 +1,175 @@
+<!DOCTYPE HTML>
+<html lang='cn'>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="keywords" content="金山快盤,簽到,簽到助手">
+    <meta name="description" content="金山快盤簽到助手，只需輕輕一點，長期幫你簽到。">
+    <title>快盤簽到</title>
+    <style type="text/css" media="screen">
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            background: #07080A url('/static/bg.jpg') no-repeat center;
+            height: 100%;
+        }
+        p {
+            font-size: 14px;
+            font-family: 幼圆, sans-serif;
+        }
+        a {
+            color: #888888;
+            text-decoration:none;
+            font-weight:bold;
+        }
+        a:hover {
+            color: #FFFFFF;
+        }
+        #container {
+            background: rgba( 200, 200, 200, 0.1);
+            margin-right: auto;
+            margin-left: auto;
+            margin-top: 180px;
+            line-height: 20px;
+            height: 250px;
+            width: 500px;
+            padding: 10px;
+            -webkit-border-bottom-left-radius: 20px;
+            -webkit-border-top-right-radius: 20px;
+            -moz-border-radius-bottomleft: 20px;
+            -moz-border-radius-topright: 20px;
+            border-radius: 0px 20px;
+        }
+        #topic {
+            margin: 38px;
+            color: #AAAAAA;
+            width: 150px;
+            float: left;
+        }
+        #login {
+            margin-top: 36px;
+            margin-left: 10px;
+            float: left;
+        }
+        #cbdiv {
+            text-align: center;
+            margin-top: 25px;
+            color: #AAAAAA;
+            font-size:small;
+        }
+        #btn {
+            width: 60px;
+            height:26px;
+            color: #AAAAAA;
+            margin-right:20px;
+            background: rgba( 200, 200, 200, 0.2);
+            cursor:pointer;
+            -webkit-border-bottom-left-radius: 2px;
+            -webkit-border-top-right-radius: 2px;
+            -moz-border-radius-bottomleft: 2px;
+            -moz-border-radius-topright: 2px;
+            border-radius: 2px;
+        }
+        #footer {
+            width: 100%;
+            position:fixed;
+            bottom: 6px;
+            font-family: 幼圆, sans-serif;
+            font-size: 14px;
+            color: #888888;
+            text-align: center;
+        }
+        .inp {
+            color: #FFFFFF;
+            font-size: 1em;
+            margin-top: 25px;
+            padding: 5px;
+            border: thin;
+            width: 200px;
+            background: rgba( 200, 200, 200, 0.2);
+        }
+        .inp:hover, .inp:focus, #btn:hover {
+            background: rgba( 255, 255, 255, 0.38);
+        }
+        #signyear {
+            cursor:pointer;
+            text-decoration:underline;
+        }
+        #signyear:hover {
+            color: white;
+        }
+        #msg_box {
+            display: none;
+            text-align: center;
+        }
+        #freere {
+            color: white;
+            cursor:pointer;
+        }
+    </style>
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+    <script type="text/javascript" src="/static/jquery.blockUI.js"> </script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+
+            $("#btn").click(function() {
+                if( $('#un').val() == "" || $('#pw').val() == "" )
+                    $("#msg_box").text("未輸入郵箱或密碼...") 
+                else
+                    $("#msg_box").load('/sign/' + $('#un').val() + '/' + $("#pw").val() +
+                                        '/' + $('#cb').attr("checked") + '/');
+                $.blockUI({
+                    css: { 
+                        border: 'none', 
+                        padding: '15px', 
+                        backgroundColor: '#000', 
+                        '-webkit-border-radius': '10px', 
+                        '-moz-border-radius': '10px', 
+                        opacity: .8, 
+                        color: '#FFFFFF' },
+                    message: $("#msg_box")
+                });
+                $('.blockOverlay').attr('title','單擊關閉').click($.unblockUI);
+                $('.blockOverlay').click(function(){ $("#msg_box").text("請稍候") })
+            });
+
+            $("#signyear").click(function() {
+                $.blockUI({
+                    css: { 
+                        border: 'none', 
+                        padding: '30px', 
+                        backgroundColor: '#000', 
+                        '-webkit-border-radius': '10px', 
+                        '-moz-border-radius': '10px', 
+                        opacity: .8, 
+                        color: '#FFFFFF' },
+                    message: "本功能（自動簽到）將明文記錄你的密碼（因金山快盤驗證需要），我承諾不會偷窺貴私隱，但因SAE平台及本軟件受到病毒、木馬等影響進而造成你數據的損失，我將不負責任。本程序遵循MIT協議，源代碼見頁腳Github鏈接。"
+                });
+                $('.blockOverlay').attr('title','單擊關閉').click($.unblockUI);
+            });
+        });
+    </script>
+</head>
+<body>
+    <div id="container" class='r-box'>
+        <div id="topic">
+            <h2>快盤簽到</h2>
+            <br>
+            <p>金山快盤自動簽到工具，為期兩個月，免除失憶帶來的困擾和煩惱，頭不痛，眼不澀，不玩電腦身體好，大人細路都啱用㗎。要想身體好，快用我簽到。</p>
+        </div>
+        <div id="login">
+            <div><input id='un' class="inp" type="text" placeholder=" 郵   箱" tabindex="1"></div>
+            <div><input id='pw' class="inp" type="password" placeholder=" 密   码" tabindex="2"></div>
+            <div id='cbdiv'>
+                <input id='btn' type="submit" value="登 录" tabindex="4">
+                <input type="checkbox" id="cb" tabindex="3"></input>
+                已閱讀<span id='signyear'>免責聲明</span>
+            </div>
+        </div>
+    </div>
+    <div id="footer">☑Copyleft | <a target="_blank" href="http://t.sina.com.cn/zagfai">Zagfai</a> | 
+        <a target="_blank" href="https://github.com/zagfai/KCDDSer">Github</a></div>
+    <div id="msg_box">請稍候</div>
+</body>
+</html>
