@@ -73,9 +73,7 @@ class signAll():
         result = []
         for acount in users:
             result.append( Signer( str(acount[0]), str(acount[1]) ).sign() )
-            print result[-1]['user'] + result[-1]['status'].encode('utf-8') + '\n'
-
-        return "OK"
+            yield result[-1]['user'] + result[-1]['status'].encode('utf-8') + '\n'
 
 urls = (
     '/sign/(.+)/(.+)/(.+)/', 'sign',
