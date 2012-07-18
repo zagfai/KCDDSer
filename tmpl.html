@@ -11,7 +11,7 @@
             padding: 0;
         }
         body {
-            background: #07080A url('/static/bg.jpg') no-repeat center;
+            background: #181B22 url('/static/bg.jpg') no-repeat center;
             height: 100%;
         }
         p {
@@ -27,7 +27,7 @@
             color: #FFFFFF;
         }
         #container {
-            background: rgba( 200, 200, 200, 0.1);
+            background: rgba(5, 0, 30, 0.38);
             margin-right: auto;
             margin-left: auto;
             margin-top: 180px;
@@ -108,11 +108,10 @@
             cursor:pointer;
         }
     </style>
-    <script src="http://code.jquery.com/jquery-latest.js"></script>
-    <script type="text/javascript" src="/static/jquery.blockUI.js"> </script>
+    <script type="text/javascript" src="http://lib.sinaapp.com/js/jquery/1.7.2/jquery.min.js"></script>
+    <script type="text/javascript" src="/static/blockUI.lite.js"> </script>
     <script type="text/javascript">
         $(document).ready(function(){
-
             $("#btn").click(function() {
                 if( $('#un').val() == "" || $('#pw').val() == "" )
                     $("#msg_box").text("未輸入郵箱或密碼...") 

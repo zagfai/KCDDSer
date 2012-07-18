@@ -2,6 +2,8 @@
 import sae
 import web
 import MySQLdb
+import time
+from sae.mail import send_mail
 from datetime import date,timedelta
 from utils import Signer
 
@@ -57,6 +59,7 @@ class sign():
         
 class signAll():
     def GET( self ):
+        time_start = time.time()
         conn = MySQLdb.connect(host=sae.const.MYSQL_HOST, port=int(sae.const.MYSQL_PORT),\
                                 user=sae.const.MYSQL_USER, passwd=sae.const.MYSQL_PASS, \
                                 db=sae.const.MYSQL_DB,     charset="utf8")
@@ -72,8 +75,17 @@ class signAll():
 
         result = []
         for acount in users:
+            # send mail to user
+            if str(acount[2]) == date.strftime( date.today() + timedelta( 3 ), "%Y-%m-%d"):
+                send_mail( str(acount[0]), "自動簽到到期通知",
+                       "用戶你好，你的帳號" + str(acount[0]) +\
+                       "自動簽到功能三日後到期，請登錄 http://kssign.sinaapp.com 重新確認自動簽到功能。",
+                      ("smtp.sina.com", 25, "user", "passwd", False))
+            # sign
             result.append( Signer( str(acount[0]), str(acount[1]) ).sign() )
-            yield result[-1]['user'] + result[-1]['status'].encode('utf-8') + '\n'
+
+        return result[0]['status'].encode('utf-8') + '\n' + 'Time uesd: ' + str( time.time() - time_start ) + 's'
+# end signAll()
 
 urls = (
     '/sign/(.+)/(.+)/(.+)/', 'sign',

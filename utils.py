@@ -58,6 +58,6 @@ class Signer():
         if sign_js['state'] == -102:
             return u'今天簽到了，不能再簽！'
         elif sign_js['state'] == 1:
-            return u'增加 %d 到 %d 積分，還有 %dM！' % (sign_js['increase'], sign_js['status']['points'], sign_js['rewardsize'])
+            return u'增加 %d 到 %d 積分，還附送 %dM！' % (sign_js['increase'], sign_js['status']['points'], sign_js['rewardsize'])
         else:
             return u'金山JSON可能已經更新，請自便。'
