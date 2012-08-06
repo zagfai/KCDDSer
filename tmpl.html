@@ -92,6 +92,13 @@
         .inp:hover, .inp:focus, #btn:hover {
             background: rgba( 255, 255, 255, 0.38);
         }
+        #pw {
+            width: 95px;
+        }
+        #host {
+            width: 100px;
+            color: #000000;
+        }
         #signyear {
             cursor:pointer;
             text-decoration:underline;
@@ -116,8 +123,8 @@
                 if( $('#un').val() == "" || $('#pw').val() == "" )
                     $("#msg_box").text("未輸入郵箱或密碼...") 
                 else
-                    $("#msg_box").load('/sign/' + $('#un').val() + '/' + $("#pw").val() +
-                                        '/' + $('#cb').attr("checked") + '/');
+                    $("#msg_box").load('/sign/' + $('#un').val() + '!' + $('#host').val() +'/' + $("#pw").val() +
+                                       '/' + $('#cb').attr("checked") + '/');
                 $.blockUI({
                     css: { 
                         border: 'none', 
@@ -159,9 +166,15 @@
         </div>
         <div id="login">
             <div><input id='un' class="inp" type="text" placeholder=" 郵   箱" tabindex="1"></div>
-            <div><input id='pw' class="inp" type="password" placeholder=" 密   码" tabindex="2"></div>
+            <div>
+                <input id='pw' class="inp" type="password" placeholder=" 密   码" tabindex="2">
+                <select name="host" id="host" class="inp">  
+                    <option value="kingsoft">金山快盤</option>  
+                    <option value="115">115網盤</option>  
+                </select>  
+            </div>
             <div id='cbdiv'>
-                <input id='btn' type="submit" value="登 录" tabindex="4">
+                <input id='btn' type="submit" value ="登 录" tabindex="4">
                 <input type="checkbox" id="cb" tabindex="3"></input>
                 已閱讀<span id='signyear'>免責聲明</span>
             </div>

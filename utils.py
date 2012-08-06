@@ -7,7 +7,7 @@ import json
 import re
 
 # Kingsoft
-class Signer():
+class KingSinger():
     user = ''
     pwd  = ''
     result = {}
@@ -65,7 +65,7 @@ class Signer():
             return u'金山JSON可能已經更新，請自便。'
 
 # 115.com
-class OOFSign():
+class OOFSigner():
     user = ''
     pwd = ''
     result = {}
@@ -122,7 +122,11 @@ class OOFSign():
                     return u"獲取JSON失敗"
                 return u"搖曳成功，獲得%s，達到%s！"%( js['picked'], js['total_size'] )
             else:
-                print u'已經搖了，不能再搖！'
+                return u'已經搖了，不能再搖！'
 
-
+def signer( host, user, pwd ):
+    if host == 'kingsoft':
+        return KingSinger( user, pwd )
+    elif host == '115':
+        return OOFSigner( user, pwd )
 
